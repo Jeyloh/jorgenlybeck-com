@@ -3,83 +3,69 @@ import styled from 'styled-components'
 import {rotateAnimation} from './keyframes'
 import Particles from 'react-particles-js'
 import {getParticles} from '../particles-setup'
-import { animatedBackground } from '../components/IndexComponent/styles'
-import { motion } from "framer-motion";
+import {animatedBackground} from '../components/IndexComponent/styles'
+import {motion} from 'framer-motion'
 
 // https://codepen.io/magnus16/pen/rbEju
 
-
 function RotatingCube ({size, colors}) {
   const [active, toggleActive] = useState(true)
+  const [route, setRoute] = useState("")
 
-  const handle = (bool) => {
-    toggleActive(bool)
+  const handleRoute = (route) => {
+    alert(route)
+    setRoute(route)
   }
 
   const _particles = getParticles(50)
 
   return (
-    <CubeContainer
-      transition={{duration: 2}}
-      whileHover={{scale: 1.2}}
-      whilePress={{scale: 0.8}}
-      onHoverStart={e => handle(false)}
-      onHoverEnd={e => handle(true)}
-    >
+    <CubeContainer>
+
       <Cube
         animate={{rotateX: 360, rotateY: 360, rotateZ: 360}}
         transition={{
           loop: Infinity,
-          type: 'spring',
-          velocity: 0,
           ease: 'linear',
-          duration: 40
+          duration: 100,
+          scale: {
+            duration: 2
+          }
         }}
-        onClick={() => toggleActive(!active)}
+        whileHover={{scale: 1.2}}
+        onHoverStart={e => toggleActive(false)}
+        onHoverEnd={e => toggleActive(true)}
         size={size}
       >
-        <Side size={size} id='s1' color={colors[0]}>
-          <Particles
-            style={{position: 'absolute', top: 0, left: 0}}
-            params={_particles}
-          />
-          Jørgen <br /> Lybeck <br />Hansen
+        <Side size={size} id='s1' color={colors[0]} onClick={() => handleRoute("About")}>
+          <Particles style={{position: 'absolute', top: 0, left: 0}} params={_particles} />
+          Jørgen <br /> Lybeck <br />
+          Hansen
+
         </Side>
-        <Side size={size} id='s2' color={colors[1]}>
-          <Particles
-            style={{position: 'absolute', top: 0, left: 0}}
-            params={_particles}
-          />
+        <Side size={size} id='s2' color={colors[1]} onClick={() => handleRoute("Nothing")}>
+          <Particles style={{position: 'absolute', top: 0, left: 0}} params={_particles} />
         </Side>
-        <Side size={size} id='s3' color={colors[0]}>
-          <Particles
-            style={{position: 'absolute', top: 0, left: 0}}
-            params={_particles}
-          />
-          Experience/<br />
+        <Side size={size} id='s3' color={colors[0]} onClick={() => handleRoute("Portfolio")}>
+          <Particles style={{position: 'absolute', top: 0, left: 0}} params={_particles} />
+          Experience/
+          <br />
           Portfolio
         </Side>
-        <Side size={size} id='s4' color={colors[1]}>
-          <Particles
-            style={{position: 'absolute', top: 0, left: 0}}
-            params={_particles}
-          />
+        <Side size={size} id='s4' color={colors[1]} onClick={() => handleRoute("Code Snippets")}>
+          <Particles style={{position: 'absolute', top: 0, left: 0}} params={_particles} />
           Code Snippets
         </Side>
-        <Side size={size} id='s5' color={colors[2]}>
-          <Particles
-            style={{position: 'absolute', top: 0, left: 0}}
-            params={_particles}
-          />
-          Blog/<br />
+        <Side size={size} id='s5' color={colors[2]} onClick={() => handleRoute("Blog")}>
+          <Particles style={{position: 'absolute', top: 0, left: 0}} params={_particles} />
+          Blog/
+          <br />
           Articles
         </Side>
-        <Side size={size} id='s6' color={colors[2]}>
-          <Particles
-            style={{position: 'absolute', top: 0, left: 0}}
-            params={_particles}
-          />
-          Articles/<br />
+        <Side size={size} id='s6' color={colors[2]} onClick={() => handleRoute("Something Crazy")}>
+          <Particles style={{position: 'absolute', top: 0, left: 0}} params={_particles} />
+          Articles/
+          <br />
           Something Crazy
         </Side>
       </Cube>
@@ -94,8 +80,7 @@ RotatingCube.defaultProps = {
 
 export default RotatingCube
 
-const CubeContainer = styled(motion.div)`
- 
+const CubeContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -115,8 +100,8 @@ const Cube = styled(motion.div)`
 const Side = styled.div`
   position: absolute;
   display: block;
-  height: ${props => (props.size * 2) + 'px'};
-  width: ${props => (props.size * 2) + 'px'};
+  height: ${props => props.size * 2 + 'px'};
+  width: ${props => props.size * 2 + 'px'};
   ${animatedBackground}
   transition: 2000ms all;
 
@@ -134,12 +119,12 @@ const Side = styled.div`
   line-break: all;
   border: 3px solid white;
 
-  ${props => props.id === 's1' && `
+  ${props =>
+    props.id === 's1' &&
+    `
     transform: translateZ(${props.size}px);
 
   `};
-
-  
 
   transform: ${props => {
     switch (props.id) {

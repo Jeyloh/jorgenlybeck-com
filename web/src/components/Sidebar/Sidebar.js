@@ -14,13 +14,9 @@ const Sidebar = ({siteTitle}) => {
             textDecoration: `none`
           }}
         >
-          <Title>
-            Jørgen
-            <br />
-            Lybeck
-            <br />
-            Hansen
-          </Title>
+          <div>
+            Jørgen Lybeck Hansen
+          </div>
         </Link>
       </Title>
       <SidebarNavWrapper>

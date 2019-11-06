@@ -1,21 +1,22 @@
 import styled from 'styled-components'
 import {APP_COLOR} from '../Common/styles'
 import {Link} from 'gatsby'
+import {animatedBackground} from '../../components/IndexComponent/styles'
 
 export const StyledSidebar = styled.header`
-  width: 200px;
-  min-height: inherit;
-  background: ${APP_COLOR.dailyColor3};
+  ${animatedBackground};
+  width: 100%;
   color: ${APP_COLOR.light};
-
+  padding: 1em;
+  height: 2em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `
 export const Title = styled.h1`
   font-family: 'Audiowide', cursive;
   user-select: none;
-  padding: 1.45rem 0;
   color: white;
   font-size: 1.2em;
   text-align: right;
@@ -27,20 +28,17 @@ export const Title = styled.h1`
 
 export const SidebarNavWrapper = styled.nav`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 100%;
 `
 
 export const MainNavLink = styled(Link)`
   font-family: 'Open Sans';
   color: ${APP_COLOR.light};
   text-align: right;
-  width: 100%;
-  margin-bottom: 0.45rem;
+  padding: .3em;
   transition: 200ms all;
-  padding: 0.2em 2.15em 0.2em 0;
   font-size: 1.2em;
 
   &.active {
@@ -49,7 +47,6 @@ export const MainNavLink = styled(Link)`
   }
 
   :hover {
-    background: ${APP_COLOR.light};
     color: ${APP_COLOR.dark};
   }
 `

@@ -46,7 +46,7 @@ export const animatedBackground = css`
   );
   background-size: ${size} ${size};
   animation: ${kfSlide} 40s infinite linear forwards;
-  `
+`
 export const SplashScreenWrapper = styled.div`
   height: 100vh;
   width: 100vw;
