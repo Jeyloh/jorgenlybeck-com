@@ -1,102 +1,80 @@
 import React from 'react'
-import {graphql} from 'gatsby'
-import {
-  mapEdgesToNodes,
-  filterOutDocsWithoutSlugs,
-  filterOutDocsPublishedInTheFuture
-} from '../lib/helpers'
-import Container from '../components/container'
-import GraphQLErrorList from '../components/graphql-error-list'
-import ProjectPreviewGrid from '../components/project-preview-grid'
+import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
-import Layout from '../containers/layout'
+import * as Styled from '../components/IndexComponent/styles'
+import Particles from 'react-particles-js'
+import {getParticles} from '../particles-setup'
+import BlockContent from '@sanity/block-content-to-react'
+import imageUrlBuilder from '@sanity/image-url'
+import myConfiguredSanityClient from '../../client-config'
+import arrIcon from '../images/white-down-arrow.png'
+import {graphql} from 'gatsby'
+import RotatingCube from '../assets/RotatingCube'
 
 export const query = graphql`
-  query IndexPageQuery {
-    site: sanitySiteSettings(_id: {regex: "/(drafts.|)siteSettings/"}) {
-      title
-      description
-      keywords
-    }
-    projects: allSanityProject(
-      limit: 6
-      sort: {fields: [publishedAt], order: DESC}
-      filter: {slug: {current: {ne: null}}, publishedAt: {ne: null}}
-    ) {
-      edges {
-        node {
-          id
-          mainImage {
-            crop {
-              _key
-              _type
-              top
-              bottom
-              left
-              right
-            }
-            hotspot {
-              _key
-              _type
-              x
-              y
-              height
-              width
-            }
-            asset {
-              _id
-            }
-            alt
-          }
-          title
-          _rawExcerpt
-          slug {
-            current
-          }
-        }
-      }
+  query AboutQuery {
+    sanityAbout {
+      _id
+      header
+      _rawDescription
+      _rawImage
     }
   }
 `
 
-const IndexPage = props => {
-  const {data, errors} = props
+// https://github.com/alexfoxy/laxxx/blob/master/README.md#supported-presets
 
-  if (errors) {
-    return (
-      <Layout>
-        <GraphQLErrorList errors={errors} />
-      </Layout>
-    )
+const IndexPage = ({data, error}) => {
+  const [particles, addParticles] = React.useState(100)
+  const scrollTopRef = React.useRef()
+  const threeRef = React.useRef()
+
+  if (error) {
+    return <div>{JSON.stringify(error)}</div>
   }
 
-  const site = (data || {}).site
-  const projectNodes = (data || {}).projects
-    ? mapEdgesToNodes(data.projects)
-      .filter(filterOutDocsWithoutSlugs)
-      .filter(filterOutDocsPublishedInTheFuture)
-    : []
-
-  if (!site) {
-    throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    )
+  function scrollDown () {
+    scrollTopRef.current && scrollTopRef.current.scrollIntoView({behavior: 'smooth'})
   }
 
+  const builder = imageUrlBuilder(myConfiguredSanityClient)
+  function urlFor (source) {
+    return builder.image(source)
+  }
+
+  // React.useEffect( () => {
+  //   threeRef.current && initCube(threeRef.current)
+  // }, [threeRef])
+
+  if (!data) return null
   return (
-    <Layout>
-      <SEO title={site.title} description={site.description} keywords={site.keywords} />
-      <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        {projectNodes && (
-          <ProjectPreviewGrid
-            title='Latest projects'
-            nodes={projectNodes}
-            browseMoreHref='/archive/'
-          />
-        )}
-      </Container>
-    </Layout>
+    <Styled.StyledIndexWrapper>
+      <SEO title='Jørgen Lybeck Hansen' />
+      <Styled.SplashScreenWrapper>
+        {/* <Particles
+          style={{position: 'absolute', top: 0, left: 0}}
+          params={getParticles(particles)}
+        /> */}
+        {/* <Styled.SplashScreenTitle fontSize='5rem'>
+          Jørgen
+          <br />
+          Lybeck
+          <br />
+          Hansen
+        </Styled.SplashScreenTitle> */}
+        <Styled.SplashScreenArrow src={arrIcon} alt='Logo' onClick={() => scrollDown()} />
+        <RotatingCube />
+      </Styled.SplashScreenWrapper>
+      <Layout>
+        <h1 ref={scrollTopRef}>{data.sanityAbout.header}</h1>
+        <BlockContent blocks={data.sanityAbout._rawDescription} />
+        <img
+          src={urlFor(data.sanityAbout._rawImage)
+            .width(200)
+            .url()}
+        />
+      </Layout>
+    </Styled.StyledIndexWrapper>
   )
 }
 
