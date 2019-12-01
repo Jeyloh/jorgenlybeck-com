@@ -14,20 +14,18 @@ const Sidebar = ({siteTitle}) => {
             textDecoration: `none`
           }}
         >
-          <div>
-            Jørgen Lybeck Hansen
-          </div>
+          <div>Jørgen Lybeck Hansen</div>
         </Link>
       </Title>
       <SidebarNavWrapper>
+        <MainNavLink activeClassName='active' to='/about/'>
+          About
+        </MainNavLink>
         <MainNavLink activeClassName='active' to='/projects/'>
           Projects
         </MainNavLink>
         <MainNavLink activeClassName='active' to='/experience/'>
           Experience
-        </MainNavLink>
-        <MainNavLink activeClassName='active' to='/philosophy/'>
-          Philosophy
         </MainNavLink>
         <MainNavLink activeClassName='active' to='/code-snippets/'>
           Code Snippets
@@ -35,8 +33,8 @@ const Sidebar = ({siteTitle}) => {
         <MainNavLink activeClassName='active' to='/blog/'>
           Blog
         </MainNavLink>
-        <MainNavLink activeClassName='active' to='/uses/'>
-          Uses
+        <MainNavLink activeClassName='active' to='/hobbies/'>
+          Hobbies
         </MainNavLink>
       </SidebarNavWrapper>
     </StyledSidebar>

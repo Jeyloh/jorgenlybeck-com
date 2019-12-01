@@ -2,7 +2,7 @@ import styled, {keyframes, css} from 'styled-components'
 import {APP_COLOR} from '../Common/styles'
 
 export const StyledIndexWrapper = styled.main`
-  overflow-x: hidden;
+  overflow: hidden;
 `
 
 export const IndexContent = styled.div`
@@ -54,7 +54,6 @@ export const SplashScreenWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: black;
 `
 
 export const SplashScreenTitle = styled.h1`

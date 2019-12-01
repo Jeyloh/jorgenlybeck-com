@@ -16,7 +16,13 @@ const Experiences = ({data}) => {
     })
     const merged = [].concat.apply([], techStringFromArray)
 
-    wordCloud(merged).start()
+    console.log(merged)
+
+    const allMain = window.document.getElementsByTagName("main");
+    const mainElem = allMain[0];
+
+
+    wordCloud(merged, mainElem.offsetWidth / 1.01, mainElem.offsetHeight / 1.5).start()
   })
 
   return (

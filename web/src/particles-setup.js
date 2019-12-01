@@ -1,4 +1,4 @@
-export const getParticles = particles => {
+export const getParticles = (particles, disableClick = false) => {
   return {
     particles: {
       number: {
@@ -76,7 +76,7 @@ export const getParticles = particles => {
           mode: 'grab'
         },
         onclick: {
-          enable: true,
+          enable: !disableClick,
           mode: 'push'
         },
         resize: true

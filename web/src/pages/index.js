@@ -2,8 +2,8 @@ import React from 'react'
 import Layout from '../components/Layout/Layout'
 import SEO from '../components/seo'
 import * as Styled from '../components/IndexComponent/styles'
-import arrIcon from '../images/white-down-arrow.png'
 import RotatingCube from '../assets/RotatingCube'
+import CubeRoutingContainer from '../components/Sidebar/RouteContainer'
 
 // https://github.com/alexfoxy/laxxx/blob/master/README.md#supported-presets
 
@@ -13,7 +13,7 @@ const IndexPage = () => {
   // const threeRef = React.useRef()
 
   function scrollDown () {
-    scrollTopRef.current && scrollTopRef.current.scrollIntoView({ behavior: 'smooth' })
+    scrollTopRef.current && scrollTopRef.current.scrollIntoView({behavior: 'smooth'})
   }
 
   // React.useEffect( () => {
@@ -25,6 +25,11 @@ const IndexPage = () => {
   // React.useEffect( () => {
   //   threeRef.current && initCube(threeRef.current)
   // }, [threeRef])
+
+  const [ currentComponent, setCurrentComponent ] = React.useState(null);
+  const handleCubeCallback = (component) => {
+    setCurrentComponent(component)
+  }
 
   return (
     <Styled.StyledIndexWrapper>
@@ -52,11 +57,12 @@ const IndexPage = () => {
         </Styled.SplashScreenTitle> */}
       <Layout>
         <Styled.SplashScreenWrapper>
-          <RotatingCube />
-          <Styled.SplashScreenArrow src={arrIcon} alt='Logo' onClick={() => scrollDown()} />
-
+          {/* {currentComponent ? 
+          <CubeRoutingContainer component={currentComponent} />
+        : */}
+        <RotatingCube callback={handleCubeCallback} />
+        {/* } */}
         </Styled.SplashScreenWrapper>
-
       </Layout>
     </Styled.StyledIndexWrapper>
   )

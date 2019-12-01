@@ -5,16 +5,6 @@ import 'react-vertical-timeline-component/style.min.css'
 import BlockContent from '@sanity/block-content-to-react'
 import {graphql} from 'gatsby'
 
-const Philosophy = ({data}) => (
-  <Layout>
-    <SEO title='Philosophy' />
-    <h1>{data.sanityPhilosophy.header}</h1>
-    <BlockContent blocks={data.sanityPhilosophy._rawPhilosophy} />
-  </Layout>
-)
-
-export default Philosophy
-
 export const query = graphql`
   query PhilosophyQuery {
     allSanityPhilosophy {
@@ -35,3 +25,23 @@ export const query = graphql`
     }
   }
 `
+
+const Philosophy = ({data}) => {
+  console.log(data)
+  return (
+    <Layout>
+      <SEO title='Philosophy' />
+      {data.allSanityPhilosophy.edges.map(philosophy => {
+        console.log(philosophy.node)
+        if (!philosophy.node) return null
+        return (
+          <div key={philosophy.node._id} >
+            <h1>{philosophy.node.header}</h1>
+            <BlockContent blocks={philosophy.node._rawPhilosophy} />
+          </div>
+        )
+      })}
+    </Layout>
+  )
+}
+export default Philosophy
