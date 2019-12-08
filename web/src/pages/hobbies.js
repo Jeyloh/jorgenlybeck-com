@@ -1,22 +1,15 @@
-import React from 'react'
-import Layout from '../components/Layout/Layout'
-import SEO from '../components/seo'
-import 'react-vertical-timeline-component/style.min.css'
-import { graphql } from 'gatsby'
+import React from "react";
+import Layout from "../components/Layout/Layout";
+import SEO from "../components/seo";
+import "react-vertical-timeline-component/style.min.css";
+import { graphql } from "gatsby";
 import styled from "styled-components";
-import imageUrlBuilder from '@sanity/image-url'
-import myConfiguredSanityClient from '../../client-config'
-import Img from 'gatsby-image'
-
-const builder = imageUrlBuilder(myConfiguredSanityClient)
-
+import Img from "gatsby-image";
 
 const HobbyWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 50px;
-
 `;
 
 const HobbyItem = styled.div`
@@ -35,15 +28,19 @@ const HobbyItem = styled.div`
   flex-grow: 1;
   position: relative;
   overflow: hidden;
-
   
+  h1 {
+  padding: 10px;
 
+  }
   :hover {
     filter: unset;
   }
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
 
-  ${ props => props.isCurrent && `
+  ${props =>
+    props.isCurrent &&
+    `
     min-height: 500px;
     width: 100%;
     justify-content: flex-start;
@@ -52,26 +49,10 @@ const HobbyItem = styled.div`
 
   `}
 
-  .gatsby-image-wrapper {
-    filter: blur(2px);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    transition: all 500ms;
+  
 
-    ${ props => !props.isCurrent && `
-
-    :hover {
-      filter: unset;
-    }
-    `};
-    
-  ${ props => props.isCurrent && `
-      filter blur(20px);
-    `};
-  }
-
-  h1 , p{
+  h1,
+  p {
     position: absolute;
   }
   @media only screen and (min-width: 1200px) {
@@ -80,77 +61,158 @@ const HobbyItem = styled.div`
   @media only screen and (max-width: 460px) {
     width: 100%;
   }
-
 `;
 
+const HobbiesGridWrapper = styled.div`
+  padding: 20px 0;
+  display: grid;
+  grid-gap: 20px 0;
+  grid-template-columns: 20px 1fr 20px;
+  align-content: start;
+  width: 100%;
+  > * {
+    grid-column: 2 / -2;
+  }
 
-const Hobbies = ({ data }) => {
-  console.log(data)
+  > .full {
+    grid-column: 1 / -1;
+  }
+
+  .hs {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: 10px;
+    grid-template-rows: minmax(150px, 1fr);
+    grid-auto-flow: column;
+    grid-auto-columns: calc(50% - 20px * 2);
+
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    padding-bottom: calc(.75 * 20px);
+    margin-bottom: calc(-.25 * 20px);
+
+    :before,
+    :after {
+      content: '';
+      width: 10px;
+    }
+  }
+
+  .hs > li,
+  .item {
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+
+    .gatsby-image-wrapper {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all 500ms;
+    border-radius: 8px;
+
+    ${props =>
+      !props.isCurrent &&
+      `
+
+    :hover {
+      filter: unset;
+    }
+    `};
+
+    ${props =>
+      props.isCurrent &&
+      `
+      filter blur(20px);
+    `};
+  }
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Hobbies = ({ data, location }) => {
+  console.log(data);
 
   const [current, setCurrent] = React.useState(null);
 
-  const handleSetCurrent = (id) => {
+  const handleSetCurrent = id => {
     console.log(id);
     //setCurrent(id)
-  }
+  };
 
   console.log(data);
   return (
-    <Layout>
-      <SEO title='Hobbies' />
+    <Layout location={location}>
+      <SEO title="Hobbies" />
       <HobbyWrapper>
-        {data.allSanityHobbies.edges.map(hobbies => {
-          console.log(hobbies.node)
-          if (!hobbies.node) return null
-          const id = hobbies.node.id;
-          const isCurrent = current === id;
-          const fluid = hobbies.node.image ? hobbies.node.image.asset.fluid : null;
-          return (
-            <HobbyItem key={id} isCurrent={isCurrent} onClick={() => handleSetCurrent(id)}> 
-            
-            {/* imgSrc={fluid ? fluid.src : ""} */}
-              {
-                fluid ? <Img fluid={fluid} /> : null
-              }
-              <h1>{hobbies.node.title}</h1>
-              {isCurrent && <>
-                <p>{hobbies.node.description} </p>
-              </>}
-            </HobbyItem>
-
-          )
-        })}
+        
+        <HobbiesGridWrapper>
+          {data.allSanityHobbies.edges.map(hobbies => {
+              console.log(hobbies.node);
+              if (!hobbies.node) return null;
+              const id = hobbies.node.id;
+              const isCurrent = current === id;
+              const fluid = hobbies.node.image ? hobbies.node.image.asset.fluid : null;
+              return (
+                <>
+                  <h2>{hobbies.node.title}</h2>
+                  <ul class="hs full no-scrollbar">
+                    <li class="item">
+                      {fluid && <Img fluid={fluid} /> }
+                    </li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                    <li class="item">test</li>
+                  </ul>
+                </>
+              )
+            })}
+        </HobbiesGridWrapper>
+         
       </HobbyWrapper>
     </Layout>
-  )
-}
-export default Hobbies
-
+  );
+};
+export default Hobbies;
 
 export const query = graphql`
   query HobbiesQuery {
     allSanityHobbies {
-    edges {
-      node {
-        id
-        description
-        title
-        image {
-          _key
-          asset {
-            fluid(maxWidth: 600) {
-              aspectRatio
-              src
-              srcSet
-              sizes
-              base64
-              srcWebp
-              srcSetWebp
+      edges {
+        node {
+          id
+          description
+          title
+          image {
+            _key
+            asset {
+              fluid(maxWidth: 600) {
+                aspectRatio
+                src
+                srcSet
+                sizes
+                base64
+                srcWebp
+                srcSetWebp
               }
+            }
           }
         }
       }
     }
   }
-  }
-`
+`;

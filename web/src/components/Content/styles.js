@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-import {APP_COLOR} from '../Common/styles'
-import { animatedBackground } from '../IndexComponent/styles'
+import styled from "styled-components";
+import { APP_COLOR } from "../Common/styles";
+import { animatedBackground } from "../IndexComponent/styles";
 
 export const StyledContentWrapper = styled.main`
   /* background: ${APP_COLOR.light};
@@ -16,4 +16,4 @@ export const StyledContentWrapper = styled.main`
    
      color: white;
 
-`
+`;

@@ -9,19 +9,19 @@ export const getParticles = (particles, disableClick = false) => {
         }
       },
       color: {
-        value: '#ffffff'
+        value: "#ffffff"
       },
       shape: {
-        type: 'circle',
+        type: "circle",
         stroke: {
           width: 0,
-          color: '#000000'
+          color: "#000000"
         },
         polygon: {
           nb_sides: 5
         },
         image: {
-          src: 'img/github.svg',
+          src: "img/github.svg",
           width: 100,
           height: 100
         }
@@ -49,17 +49,17 @@ export const getParticles = (particles, disableClick = false) => {
       line_linked: {
         enable: true,
         distance: 150,
-        color: '#ffffff',
+        color: "#ffffff",
         opacity: 0.4,
         width: 1
       },
       move: {
         enable: true,
         speed: 2,
-        direction: 'none',
+        direction: "none",
         random: false,
         straight: false,
-        out_mode: 'out',
+        out_mode: "out",
         bounce: false,
         attract: {
           enable: false,
@@ -69,15 +69,15 @@ export const getParticles = (particles, disableClick = false) => {
       }
     },
     interactivity: {
-      detect_on: 'canvas',
+      detect_on: "canvas",
       events: {
         onhover: {
           enable: true,
-          mode: 'grab'
+          mode: "grab"
         },
         onclick: {
           enable: !disableClick,
-          mode: 'push'
+          mode: "push"
         },
         resize: true
       },
@@ -108,5 +108,5 @@ export const getParticles = (particles, disableClick = false) => {
       }
     },
     retina_detect: true
-  }
-}
+  };
+};

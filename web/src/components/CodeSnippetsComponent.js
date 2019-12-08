@@ -1,38 +1,37 @@
-import React from 'react'
-import BlockContent from '@sanity/block-content-to-react'
-import Refractor from 'react-refractor'
-import js from 'refractor/lang/javascript'
-import css from 'refractor/lang/css'
-import '../styles/prism.css'
-import styled from 'styled-components'
-import { StaticQuery, graphql } from "gatsby"
+import React from "react";
+import BlockContent from "@sanity/block-content-to-react";
+import Refractor from "react-refractor";
+import js from "refractor/lang/javascript";
+import css from "refractor/lang/css";
+import "../styles/prism.css";
+import styled from "styled-components";
+import { StaticQuery, graphql } from "gatsby";
 
 export const CodeBlockContent = ({ blocks }) => {
-  Refractor.registerLanguage(js)
-  Refractor.registerLanguage(css)
+  Refractor.registerLanguage(js);
+  Refractor.registerLanguage(css);
 
   const StyledRefractor = styled(Refractor)`
     background: #272822;
-  `
+  `;
 
   const serializers = {
     types: {
       authorReference: ({ node }) => <span>{node.author.name}</span>,
       code({ node }) {
-        return <StyledRefractor value={node.code} language={node.language} />
+        return <StyledRefractor value={node.code} language={node.language} />;
       }
     }
-  }
-  return <BlockContent blocks={blocks} serializers={serializers} />
-}
+  };
+  return <BlockContent blocks={blocks} serializers={serializers} />;
+};
 
 const CodeSnippetsComponent = () => {
-
   return (
     <StaticQuery
       query={graphql`
-       query CodeSnippetsCompQuery {
-         allSanityCodeSnippets {
+        query CodeSnippetsCompQuery {
+          allSanityCodeSnippets {
             edges {
               node {
                 _id
@@ -50,7 +49,7 @@ const CodeSnippetsComponent = () => {
             }
           }
         }
-    `}
+      `}
       render={data => (
         <div>
           {data.allSanityCodeSnippets.edges.map(({ node: use }) => {
@@ -59,12 +58,12 @@ const CodeSnippetsComponent = () => {
                 <h5>{use.description}</h5>
                 <CodeBlockContent blocks={use._rawCodeSnippet} />
               </div>
-            )
+            );
           })}
         </div>
       )}
     />
-  )
-}
+  );
+};
 
-export default CodeSnippetsComponent
+export default CodeSnippetsComponent;

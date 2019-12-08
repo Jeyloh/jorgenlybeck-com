@@ -1,4 +1,4 @@
-import {css, keyframes} from 'styled-components'
+import { css, keyframes } from "styled-components";
 
 const rotate = keyframes`
    0%{
@@ -13,7 +13,7 @@ const rotate = keyframes`
     100%{
       transform:rotateX(360deg) rotateY(360deg)  rotateZ(360deg);
     }
-`
+`;
 
 const xyRotation = keyframes`
    0%{
@@ -22,16 +22,16 @@ const xyRotation = keyframes`
     100%{
        transform:rotateX(360deg) rotateY(360deg)  rotateZ(0deg);    
     }
-`
+`;
 
 export const rotateAnimation = () =>
   css`
     ${xyRotation} 20s infinite linear;
-  `
+  `;
 export const rotateOnceAnimation = () =>
   css`
     ${rotateX} 4s;
-  `
+  `;
 
 const rotateX = keyframes`
    0%{
@@ -40,17 +40,17 @@ const rotateX = keyframes`
     100%{
       transform:rotateX(0deg) rotateY(360deg)  rotateZ(0deg);
     }
-`
+`;
 
 export const rotateXAnimation = () =>
   css`
     ${rotateX} 4s infinite alternate;
-  `
+  `;
 
 export const glowAnimation = () =>
   css`
     animation: ${glow} 3s ease-in-out;
-  `
+  `;
 
 const glow = keyframes`
     0% {
@@ -68,4 +68,4 @@ const glow = keyframes`
       text-shadow: 20px 20px 50px rgba(255, 255, 255, .5),
       -20px -20px 50px rgba(255, 255, 255, .5);
     }
-`
+`;

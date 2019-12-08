@@ -5,5 +5,5 @@
  */
 
 // You can delete this file if you're not using it
-require('typeface-open-sans')
-require('typeface-audiowide')
+require("typeface-open-sans");
+require("typeface-audiowide");

@@ -1,11 +1,10 @@
-import React from 'react'
-import {StyledContentWrapper} from './styles'
+import React from "react";
+import { StyledContentWrapper } from "./styles";
 
-const Content = ({children}) => <StyledContentWrapper>{children}</StyledContentWrapper>
-
+const Content = ({ children }) => <StyledContentWrapper>{children}</StyledContentWrapper>;
 
 Content.defaultProps = {
   children: ``
-}
+};
 
-export default Content
+export default Content;

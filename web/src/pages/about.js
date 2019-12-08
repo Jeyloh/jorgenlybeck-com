@@ -1,10 +1,10 @@
-import React from 'react'
-import Layout from '../components/Layout/Layout'
-import SEO from '../components/seo'
-import {graphql} from 'gatsby'
-import BlockContent from '@sanity/block-content-to-react'
-import imageUrlBuilder from '@sanity/image-url'
-import myConfiguredSanityClient from '../../client-config'
+import React from "react";
+import Layout from "../components/Layout/Layout";
+import SEO from "../components/seo";
+import { graphql } from "gatsby";
+import BlockContent from "@sanity/block-content-to-react";
+import Img from "gatsby-image";
+
 
 export const query = graphql`
   query AboutQuery {
@@ -12,37 +12,44 @@ export const query = graphql`
       _id
       header
       _rawDescription
-      _rawImage
+      image {
+            _key
+            asset {
+              fluid(maxWidth: 600) {
+                aspectRatio
+                src
+                srcSet
+                sizes
+                base64
+                srcWebp
+                srcSetWebp
+              }
+            }
+          }
     }
   }
-`
+`;
 
-const builder = imageUrlBuilder(myConfiguredSanityClient)
 
-function urlFor (source) {
-  return builder.image(source)
-}
-
-const About = ({data, error}) => {
+const About = ({ data, error, location }) => {
   if (error) {
-    return <div>{JSON.stringify(error)}</div>
+    return <div>{JSON.stringify(error)}</div>;
   }
-  if (!data) return null
+  if (!data) return null;
+
   else {
+    const fluid = data.sanityAbout.image ? data.sanityAbout.image.asset.fluid : null;
+
     return (
-      <Layout>
-        <SEO title='Jørgen Lybeck Hansen' />
+      <Layout location={location}>
+        <SEO title="Jørgen Lybeck Hansen" />
 
         <h1>{data.sanityAbout.header}</h1>
         <BlockContent blocks={data.sanityAbout._rawDescription} />
-        <img
-          src={urlFor(data.sanityAbout._rawImage)
-            .width(200)
-            .url()}
-        />
+        {fluid ? <Img fluid={fluid} /> : null}
       </Layout>
-    )
+    );
   }
-}
+};
 
-export default About
+export default About;

@@ -4,37 +4,37 @@
  *
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
-import React from 'react'
-import PropTypes from 'prop-types'
-import {graphql} from 'gatsby'
-import '../layout.css'
-import Sidebar from '../Sidebar/Sidebar'
-import Content from '../Content/Content'
-import {StyledMainLayout} from './styles'
-import { motion, AnimatePresence } from 'framer-motion'
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
+import "../layout.css";
+import Sidebar from "../Sidebar/Sidebar";
+import Content from "../Content/Content";
+import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { animatedBackground } from '../IndexComponent/styles'
+import { animatedBackground } from "../IndexComponent/styles";
 
-const duration = 0.5
 
+const duration = 0.5;
 
 const variants = {
   initial: {
-    opacity: 0,
+    scale: 0
   },
   enter: {
-    opacity: 1,
+    scale: 1,
     transition: {
-      duration: duration,
+      duration: duration * 3,
+      ease: "easeInOut",
       delay: duration,
-      when: 'beforeChildren',
-    },
+      when: "beforeChildren"
+    }
   },
   exit: {
-    opacity: 0,
-    transition: { duration: duration },
-  },
-}
+    scale: 0,
+    transition: { duration: duration }
+  }
+};
 
 // export const query = graphql`
 //   query LayoutQuery {
@@ -47,33 +47,54 @@ const variants = {
 //   }
 // `
 
-const StyledMainLayoutWrapper = styled(motion.main)`
-   height: calc(100vh);
-   ${animatedBackground}
-   padding-top: 10vh;
-   overflow-y: scroll;
-   color: white;
+
+const StyledMainLayoutWrapper = styled(motion.div)`
+  ${animatedBackground}
+  min-height: 100vh;
+  width: 100vw;
+  overflow:hidden;
+`;
+const AnimatedContent = styled(motion.main)`
+  padding: 8vh 10vw 0;
+  ${props => props.pathname.includes("/hobbies") && `padding: 8vh 0 0`};
+  
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  color: #fff;
+
+  h1 {
+    margin-bottom: 1.5em;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    padding: 8vh 3em 0;
+    ${props => props.pathname.includes("/hobbies") && `padding: 8vh 0 0`};
+
+  }
+
 `;
 
-
-const Layout = ({children}) => {
+const Layout = ({ children, location }) => {
   return (
-    <StyledMainLayout>
-      <Sidebar siteTitle={'data.title'} />
-      <Content>{children}</Content>
-      <AnimatePresence>
-        <StyledMainLayoutWrapper
-          key={`location.pathname`}
-          variants={variants}
-          initial="initial"
-          animate="enter"
-          exit="exit"
-        >
-          {children}
-        </StyledMainLayoutWrapper>
-      </AnimatePresence>
-    </StyledMainLayout>
-  )
-}
+    <div>
+      <Sidebar siteTitle={"data.title"} />
+      <StyledMainLayoutWrapper>
+        <AnimatePresence>
+          <AnimatedContent
+            pathname={location.pathname}
+            key={location.pathname}
+            variants={variants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+          >
+            {children}
+          </AnimatedContent>
+        </AnimatePresence>
+      </StyledMainLayoutWrapper>
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;
