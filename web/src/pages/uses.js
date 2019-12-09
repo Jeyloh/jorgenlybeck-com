@@ -3,9 +3,9 @@ import Layout from "../components/Layout/Layout";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
 
-const Uses = ({ data }) => {
+const Uses = ({ data, location}) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <SEO title="Uses" />
       <h1>Hi from the Uses page</h1>
       {data.allSanityUses.edges.map(({ node: use }) => (
