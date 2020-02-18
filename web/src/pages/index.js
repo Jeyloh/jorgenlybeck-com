@@ -37,9 +37,8 @@ const IndexPage = ({ location }) => {
    
       <Layout location={location}>
       <SEO title="Jørgen Lybeck Hansen" />
-
+      
       <RotatingCube callback={handleCubeCallback} />
-
      
       </Layout>
   );
