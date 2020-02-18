@@ -89,12 +89,6 @@ const MenuButtons = () => {
       <MainNavLink activeClassName="active" to="/code-snippets/">
         Code Snippets
       </MainNavLink>
-      <MainNavLink activeClassName="active" to="/blog/">
-        Blog
-      </MainNavLink>
-      <MainNavLink activeClassName="active" to="/hobbies/">
-        Hobbies
-      </MainNavLink>
     </>
   )
 }

@@ -17,7 +17,7 @@ const cubeVariants = {
       transition: {
         loop: Infinity,
         ease: "linear",
-        duration: 100
+        duration: 10
       }
     },
     quickRotation: {
@@ -26,13 +26,13 @@ const cubeVariants = {
       transition: {
           rotateX: {
             loop: Infinity,
-            ease: "easeIn",
-            duration: 18,
+            ease: "easeInOut",
+            duration: 6,
           },
           rotateY: {
             loop: Infinity,
-            ease: "easeIn",
-            duration: 18,
+            ease: "easeInOut",
+            duration: 6,
           },
       }
     },
@@ -42,8 +42,8 @@ const cubeVariants = {
         scale: 0,
         transition: {
           scale: {
-            duration: 12,
-            delay: 6,
+            duration: 2,
+            delay: 4,
             ease: "easeIn",
           }
         }
@@ -55,8 +55,6 @@ function RotatingCube({ size, colors, callback }) {
   const [clicked, toggleClicked] = useState(false);
   const [particles, setParticles] = useState(getParticles(50));
 
-
-
   const handleRoute = (route) => {
     // alert(route)
     if (clicked) return null;
@@ -64,7 +62,7 @@ function RotatingCube({ size, colors, callback }) {
 
     setTimeout(() => {
       navigate(route);
-    }, 18000);
+    }, 7000);
   };
 
 
