@@ -4,34 +4,6 @@ import SEO from "../components/seo";
 import wordCloud from "../assets/word_cloud";
 import { graphql } from "gatsby";
 
-const Experiences = ({ data, location }) => {
-  const ref = React.useRef();
-
-  React.useEffect(() => {
-    while (ref.current && ref.current.firstChild) {
-      ref.current.removeChild(ref.current.firstChild);
-    }
-    const techStringFromArray = data.allSanityProjects.edges.map(({ node: use }) => {
-      return use.technologyString.split(",");
-    });
-    const merged = [].concat.apply([], techStringFromArray);
-
-    const allMain = window.document.getElementsByTagName("main");
-    const mainElem = allMain[0];
-
-
-    wordCloud(merged, mainElem.offsetWidth / 1.2, mainElem.offsetHeight).start()
-  })
-
-  return (
-    <Layout location={location}>
-      <SEO title="Experiences" />
-      <svg ref={ref} id="word_cloud" />
-    </Layout>
-  );
-};
-
-export default Experiences;
 
 export const query = graphql`
   query ExperienceQuery {
@@ -61,3 +33,34 @@ export const query = graphql`
     }
   }
 `;
+
+
+const Experiences = ({ data, location }) => {
+  const ref = React.useRef();
+
+  React.useEffect(() => {
+    if (!data) return
+    while (ref.current && ref.current.firstChild) {
+      ref.current.removeChild(ref.current.firstChild);
+    }
+    const techStringFromArray = data.allSanityProjects.edges.map(({ node: use }) => {
+      return use.technologyString.split(",");
+    });
+    const merged = [].concat.apply([], techStringFromArray);
+
+    const allMain = window.document.getElementsByTagName("main");
+    const mainElem = allMain[0];
+
+
+    wordCloud(merged, mainElem.offsetWidth / 1.2, mainElem.offsetHeight).start()
+  }, [data])
+
+  return (
+    <Layout location={location}>
+      <SEO title="Experiences" />
+      <svg ref={ref} id="word_cloud" />
+    </Layout>
+  );
+};
+
+export default Experiences;

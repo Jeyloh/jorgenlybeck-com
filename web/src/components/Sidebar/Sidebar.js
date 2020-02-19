@@ -2,8 +2,9 @@ import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React from "react";
 import { StyledSidebar, MobileMenuButton, SidebarNavWrapper, FullscreenMenu, Title, MainNavLink } from "./styles";
-import { useLargerThanSizes } from "../../hooks";
+import { useLargerThanSizes, useWindowSize } from "../../hooks";
 import { AnimatePresence } from "framer-motion";
+import TextAnimation from "../../assets/TextAnimation";
 
 const mobileMenuVariant = {
     open: {
@@ -28,6 +29,8 @@ const Sidebar = ({ siteTitle }) => {
     setMenuOpen(!menuOpen);
   }
 
+  const { width } = useWindowSize();
+
   return (
     <StyledSidebar>
       <Title>
@@ -38,7 +41,7 @@ const Sidebar = ({ siteTitle }) => {
             textDecoration: `none`
           }}
         >
-          <div id="jlh-logo" />
+          <TextAnimation id="jlh-logo" text={ width > 1000 ? "Jørgen Lybeck Hansen" : "JLH" }/>
         </Link>
       </Title>
       { tablet ? 
@@ -88,6 +91,12 @@ const MenuButtons = () => {
       </MainNavLink>
       <MainNavLink activeClassName="active" to="/code-snippets/">
         Code Snippets
+      </MainNavLink>
+      <MainNavLink activeClassName="active" to="/blog/">
+        Blog
+      </MainNavLink>
+      <MainNavLink activeClassName="active" to="/hobbies/">
+        Hobbies
       </MainNavLink>
     </>
   )

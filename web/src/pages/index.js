@@ -4,8 +4,14 @@ import SEO from "../components/seo";
 import * as Styled from "../components/IndexComponent/styles";
 import RotatingCube from "../assets/RotatingCube";
 import CubeRoutingContainer from "../components/Sidebar/RouteContainer";
+import ScrollWrapper from "../assets/ScrollWrapper";
+import Hobbies from "../pages/hobbies";
+import Experience from "../pages/experience";
+import About from "../pages/about";
 
 // https://github.com/alexfoxy/laxxx/blob/master/README.md#supported-presets
+
+
 
 const IndexPage = ({ location }) => {
   const scrollTopRef = React.useRef();
@@ -26,10 +32,8 @@ const IndexPage = ({ location }) => {
   //   threeRef.current && initCube(threeRef.current)
   // }, [threeRef])
 
-  const [currentComponent, setCurrentComponent] = React.useState(null);
-  const handleCubeCallback = component => {
-    setCurrentComponent(component);
-  };
+
+
 
   console.log(location);
 
@@ -37,8 +41,9 @@ const IndexPage = ({ location }) => {
    
       <Layout location={location}>
       <SEO title="Jørgen Lybeck Hansen" />
+      {/* <ScrollWrapper componentsArray={componentsArray} /> */}
 
-      <RotatingCube callback={handleCubeCallback} />
+      <RotatingCube />
      
       </Layout>
   );

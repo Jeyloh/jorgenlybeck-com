@@ -16,17 +16,6 @@ export const StyledSidebar = styled.header`
   z-index: 100;
   padding: 0 10vw;
 
-  #jlh-logo:after {
-      content: "Jørgen Lybeck Hansen"
-    }
-
-  @media only screen and (max-width: 1024px) {
-    padding: 0 3em;
-
-    #jlh-logo:after {
-      content: "JLH"
-    }
-  }
 `;
 export const Title = styled.h1`
   font-family: "Audiowide", cursive;
@@ -50,7 +39,7 @@ export const SidebarNavWrapper = styled.nav`
 
 export const MobileMenuButton = styled.button`
   position: absolute;
-  top: 1em;
+  top: .5em;
   right: 1em;
   border: none;
   background: none;

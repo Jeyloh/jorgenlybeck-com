@@ -1,11 +1,12 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
 import SEO from "../components/seo";
+import TextAnimation from "../assets/TextAnimation";
 
 const Blog = ({ location }) => (
   <Layout location={location}>
     <SEO title="Blog" />
-    <h1>Hi from the Blog page</h1>
+    <TextAnimation text="Hi from the blog page" />
   </Layout>
 );
 
