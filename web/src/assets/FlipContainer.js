@@ -37,6 +37,14 @@ export default function FlipContainer({ size, colors, callback }) {
             else if (i === 74) squares.push(<FlipComponent key={`flip-${i}`} route={"/experience"} id={`flip-${i}`} text="EXP" />)
             else if (i === 75) squares.push(<FlipComponent key={`flip-${i}`} route={"/projects"} id={`flip-${i}`} text="PRT" />)
             else if (i === 76) squares.push(<FlipComponent key={`flip-${i}`} route={"/code-snippets"} id={`flip-${i}`} text="COS" />)
+
+            else if (i === 82) squares.push(<FlipComponent key={`flip-${i}`} id={`flip-${i}`} text="URL:" />)
+            else if (i === 83) squares.push(<FlipComponent key={`flip-${i}`} onClick={() => window.open("https://www.linkedin.com/in/jorgenlybeckhansen/")} id={`flip-${i}`} text="LinkedIn" />)
+            else if (i === 84) squares.push(<FlipComponent key={`flip-${i}`} onClick={() => window.open("https://medium.com/@jorgenlybeck")} id={`flip-${i}`} text="Medium" />)
+            else if (i === 85) squares.push(<FlipComponent key={`flip-${i}`} onClick={() => window.open("https://github.com/jeyloh")} id={`flip-${i}`} text="Github" />)
+            else if (i === 86) squares.push(<FlipComponent key={`flip-${i}`} onClick={() => window.open("https://secure.nordealiv.no/app7/enkelpensjon")} id={`flip-${i}`} text="Nordea Boost" />)
+            else if (i === 87) squares.push(<FlipComponent key={`flip-${i}`} onClick={() => window.open("https://cop-tech-radar.com")} id={`flip-${i}`} text="CG Tech Radar" />)
+
             else squares.push(<FlipComponent direction={i % 2 === 0} key={`flip-${i}`}  id={`flip-${i}`} />)
         }
         return squares;

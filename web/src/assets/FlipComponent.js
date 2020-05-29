@@ -21,12 +21,13 @@ const flipVariants = {
 };
 
 
-function FlipComponent({ size, id, direction, text, route }) {
+function FlipComponent({ size, id, direction, text, route, onClick }) {
   const [flipped, setFlipped] = useState(false);
   const [ready, setReady] = useState(false);
   const [particles, setParticles] = useState(getParticles(50));
 
   const handleClick = () => {
+    if (onClick) onClick();
     if (route) navigate(route);
   };
 
@@ -42,7 +43,7 @@ function FlipComponent({ size, id, direction, text, route }) {
   return (
     <Flip
       id={id}
-      pointer={route && ready}
+      pointer={(route || onClick) && ready}
       onMouseOver={toggleFlip}
       onClick={toggleFlip}
       size={size}
@@ -53,12 +54,13 @@ function FlipComponent({ size, id, direction, text, route }) {
         initial="unflipped"
       >
         <Side
-          pointer={route && ready}
+          font={text}
+          pointer={(route || onClick) && ready}
           size={size} id="front" color={"white"} onClick={handleClick}>
           {text}
         </Side>
         <Side
-          pointer={route && ready}
+          pointer={(route || onClick) && ready}
           size={size} id="back" color={"black"}>
           <Particles style={{ position: "absolute", top: 0, left: 0 }} params={particles} />
         </Side>
@@ -90,7 +92,6 @@ const Flip = styled.div`
   > div {
     height: 100%;
     width: 100%;
-    transition: transform 0.8s;
     transform-style: preserve-3d;
     position: relative;
 
@@ -117,6 +118,10 @@ const Side = styled.div`
   font-family: "Audiowide", cursive;
   line-break: all;
   border: .1px solid white;
+
+  ${props => props.font && `
+    font-size: ${props.size / props.font.length}px;
+  `};
 
   ${ props => props.pointer && `
 
