@@ -5,57 +5,61 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 import React from "react";
-import PropTypes from "prop-types";
-import { graphql } from "gatsby";
 import "../layout.css";
 import Sidebar from "../Sidebar/Sidebar";
-import Content from "../Content/Content";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { animatedBackground } from "../IndexComponent/styles";
+import { navigate } from "gatsby";
 
 
 const duration = 0.5;
 
 const variants = {
   initial: {
-    scale: 0
+    x: "-100%",
   },
   enter: {
-    scale: 1,
+    x: 0,
     transition: {
-      duration: duration * 3,
       ease: "easeInOut",
-      delay: duration,
-      when: "beforeChildren"
+      when: "beforeChildren",
+      duration: .6,
     }
   },
   exit: {
-    scale: 0,
+    x: "100%",
     transition: { duration: duration }
   }
 };
 
-// export const query = graphql`
-//   query LayoutQuery {
-//     sanitySiteSettings(_id: {in: "siteSettings"}) {
-//       _id
-//       title
-//       subtitle
-//       description
-//     }
-//   }
-// `
-
-
-const StyledMainLayoutWrapper = styled(motion.div)`
-  ${animatedBackground}
+const StyledMainLayoutWrapper = styled.main`
+  padding: 10vh 20% 5vh 20%;
+  margin: 0;
+  background: black;
+  color: white;
   min-height: 100vh;
-  width: 100vw;
-  overflow:hidden;
+  min-width: 100vh;
+
+  #go-back {
+    position: fixed;
+    left: 2em;
+    top: 2em;
+    background: black;
+    border: none;
+    color: white;
+  }
+
+  * {
+    color: white;
+  }
+  h1 {
+    margin-bottom: 1.5em;
+  }
 `;
 const AnimatedContent = styled(motion.main)`
-  padding: 8vh 10vw 0;
+  padding: 0 15%;
+  margin-top: 10%;
   ${props => props.pathname.includes("/hobbies") && `padding: 8vh 0 0`};
   
   overflow: hidden;
@@ -77,23 +81,10 @@ const AnimatedContent = styled(motion.main)`
 
 const Layout = ({ children, location }) => {
   return (
-    <div>
-      <Sidebar siteTitle={"data.title"} />
-      <StyledMainLayoutWrapper>
-        <AnimatePresence>
-          <AnimatedContent
-            pathname={location.pathname}
-            key={location.pathname}
-            variants={variants}
-            initial="initial"
-            animate="enter"
-            exit="exit"
-          >
-            {children}
-          </AnimatedContent>
-        </AnimatePresence>
-      </StyledMainLayoutWrapper>
-    </div>
+    <StyledMainLayoutWrapper>
+      <button id="go-back" onClick={() => navigate("/")}>Back</button>
+      {children}
+    </StyledMainLayoutWrapper>
   );
 };
 

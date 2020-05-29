@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { rotateAnimation } from "./keyframes";
 import Particles from "react-particles-js";
 import { getParticles } from "../particles-setup";
 import { animatedBackground } from "../components/IndexComponent/styles";
 import { motion, useAnimation, useCycle } from "framer-motion";
-import CodeSnippetsComponent from "../components/CodeSnippetsComponent";
 import { navigate } from "gatsby";
 
 // https://codepen.io/magnus16/pen/rbEju
@@ -56,13 +54,7 @@ function RotatingCube({ size, colors, callback }) {
   const [particles, setParticles] = useState(getParticles(50));
 
   const handleRoute = (route) => {
-    // alert(route)
-    if (clicked) return null;
-    toggleClicked(true);
-
-    setTimeout(() => {
       navigate(route);
-    }, 7000);
   };
 
 
@@ -83,9 +75,8 @@ function RotatingCube({ size, colors, callback }) {
               Jørgen <br /> Lybeck <br /> Hansen
         </Side>
           <>
-            <Side size={size} id="s2" color={colors[1]} onClick={() => handleRoute("/hobbies")}>
+            <Side size={size} id="s2" color={colors[1]} >
               <Particles style={{ position: "absolute", top: 0, left: 0 }} params={particles} />
-              Hobbies
             </Side>
             <Side size={size} id="s3" color={colors[0]} onClick={() => handleRoute("/portfolio")}>
               <Particles style={{ position: "absolute", top: 0, left: 0 }} params={particles} />
@@ -102,9 +93,7 @@ function RotatingCube({ size, colors, callback }) {
             </Side>
             <Side size={size} id="s5" color={colors[2]} onClick={() => handleRoute("/blog")}>
               <Particles style={{ position: "absolute", top: 0, left: 0 }} params={particles} />
-              Blog/
-              <br />
-              Articles
+              Blog
             </Side>
             <Side
               size={size}

@@ -52,12 +52,13 @@ const Experiences = ({ data, location }) => {
     const mainElem = allMain[0];
 
 
-    wordCloud(merged, mainElem.offsetWidth / 1.2, mainElem.offsetHeight).start()
+    wordCloud(merged, mainElem.offsetWidth / 1.6, mainElem.offsetHeight).start()
   }, [data])
 
   return (
     <Layout location={location}>
       <SEO title="Experiences" />
+      <h1>Experience</h1>
       <svg ref={ref} id="word_cloud" />
     </Layout>
   );

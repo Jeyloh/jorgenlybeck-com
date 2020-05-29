@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 export const StyledSidebar = styled.header`
   width: 100%;
   color: ${APP_COLOR.light};
-  height: 5vh;
+  height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   position: fixed;
   z-index: 100;
-  padding: 0 10vw;
+  padding: 0 15%;
 
 `;
 export const Title = styled.h1`

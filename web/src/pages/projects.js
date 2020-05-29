@@ -9,6 +9,12 @@ import styled from "styled-components";
 const StyledProjectsWrapper = styled.div`
 
   color: black;
+
+  .vertical-timeline-element-content {
+    background: black!important;
+    border: 1px solid white!important;
+    box-shadow: none!important;
+  }
 `;
 
 const Projects = ({ data, location }) => (

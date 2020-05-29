@@ -1,13 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
 import SEO from "../components/seo";
-import * as Styled from "../components/IndexComponent/styles";
-import RotatingCube from "../assets/RotatingCube";
-import CubeRoutingContainer from "../components/Sidebar/RouteContainer";
-import ScrollWrapper from "../assets/ScrollWrapper";
-import Hobbies from "../pages/hobbies";
-import Experience from "../pages/experience";
-import About from "../pages/about";
+import FlipContainer from "../assets/FlipContainer";
 
 // https://github.com/alexfoxy/laxxx/blob/master/README.md#supported-presets
 
@@ -38,14 +32,10 @@ const IndexPage = ({ location }) => {
   console.log(location);
 
   return (
-   
-      <Layout location={location}>
-      <SEO title="Jørgen Lybeck Hansen" />
-      {/* <ScrollWrapper componentsArray={componentsArray} /> */}
-
-      <RotatingCube />
-     
-      </Layout>
+      <>
+        <SEO title="Jørgen Lybeck Hansen" />
+        <FlipContainer/>
+      </>
   );
 };
 

@@ -31,6 +31,7 @@ const Sidebar = ({ siteTitle }) => {
 
   const { width } = useWindowSize();
 
+
   return (
     <StyledSidebar>
       <Title>
@@ -94,9 +95,6 @@ const MenuButtons = () => {
       </MainNavLink>
       <MainNavLink activeClassName="active" to="/blog/">
         Blog
-      </MainNavLink>
-      <MainNavLink activeClassName="active" to="/hobbies/">
-        Hobbies
       </MainNavLink>
     </>
   )
