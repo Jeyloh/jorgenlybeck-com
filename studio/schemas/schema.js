@@ -7,6 +7,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 // We import object and document schemas
 import blockContent from './objects/blockContent'
 import mainImage from './objects/mainImage'
+import blog from './documents/blog'
 import about from './documents/about'
 import projects from './documents/projects'
 import siteSettings from './documents/siteSettings'
@@ -31,6 +32,7 @@ export default createSchema({
     experiences,
     philosophy,
     codeSnippets,
+    blog,
     uses,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
