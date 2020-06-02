@@ -53,12 +53,14 @@ const Blog = ({ data, location }) => {
   return (
     <Layout location={location}>
       <SEO title="Blog" />
+      <h1>Blog/Articles</h1>
+      <p>Some of my blog posts and articles can be found here. <a alt="medium post" href="https://medium.com/@jorgenlybeck">More can be found here on Medium</a>. </p>
       {data.allSanityBlog.edges.map((blog) => {
         console.log(config.sanity)
         const fluidProps = blog.node.image ? getFluidGatsbyImage(blog.node.image.asset._id, { maxWidth: 1024, maxHeight: 400 }, config.sanity) : null
 
         return (
-          <div>
+          <div style={{ margin: "2em 0" }}>
 
             <BlogItem onClick={() => setCurrent(current === blog.node.slug ? null : blog.node.slug)} key={blog.node._id}>
               {fluidProps ? <Img style={{ opacity: 0.5 }} fluid={fluidProps} /> : null}
