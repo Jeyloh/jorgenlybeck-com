@@ -34,7 +34,7 @@ export default function FlipContainer({ size, colors, callback }) {
             else if (i === 57) squares.push(<FlipComponent key={`flip-${i}`}  id={`flip-${i}`} text="N" />)
 
             else if (i === 73) squares.push(<FlipComponent key={`flip-${i}`} route={"/about"} id={`flip-${i}`} text="ABT" />)
-            else if (i === 74) squares.push(<FlipComponent key={`flip-${i}`} route={"/experience"} id={`flip-${i}`} text="EXP" />)
+            else if (i === 74) squares.push(<FlipComponent key={`flip-${i}`} route={"/blog"} id={`flip-${i}`} text="BLG" />)
             else if (i === 75) squares.push(<FlipComponent key={`flip-${i}`} route={"/projects"} id={`flip-${i}`} text="PRT" />)
             else if (i === 76) squares.push(<FlipComponent key={`flip-${i}`} route={"/code-snippets"} id={`flip-${i}`} text="COS" />)
 

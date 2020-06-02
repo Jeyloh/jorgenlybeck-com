@@ -11,7 +11,6 @@ const flipVariants = {
   flipped: {
     rotateY: 900,
     transition: {
-      ease: [0.17, 0.67, 0.83, 0.67],
       duration: 3
     }
   },
@@ -28,14 +27,16 @@ function FlipComponent({ size, id, direction, text, route, onClick }) {
 
   const handleClick = () => {
     if (onClick) onClick();
-    if (route) navigate(route);
+    else if (route) navigate(route);
   };
 
   const toggleFlip = () => {
     if (!flipped) {
       setFlipped(true);
       setTimeout(() => {
-        setReady(true);
+        if (!flipped) {
+          setReady(true);
+        }
       }, 3000)
     }
   }
@@ -45,7 +46,6 @@ function FlipComponent({ size, id, direction, text, route, onClick }) {
       id={id}
       pointer={(route || onClick) && ready}
       onMouseOver={toggleFlip}
-      onClick={toggleFlip}
       size={size}
     >
       <motion.div
@@ -55,12 +55,14 @@ function FlipComponent({ size, id, direction, text, route, onClick }) {
       >
         <Side
           font={text}
+          onClick={handleClick}
           pointer={(route || onClick) && ready}
-          size={size} id="front" color={"white"} onClick={handleClick}>
+          size={size} id="front" color={"white"} >
           {text}
         </Side>
         <Side
           pointer={(route || onClick) && ready}
+          onClick={toggleFlip}
           size={size} id="back" color={"black"}>
           <Particles style={{ position: "absolute", top: 0, left: 0 }} params={particles} />
         </Side>
