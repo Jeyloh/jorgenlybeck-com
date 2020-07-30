@@ -46,6 +46,16 @@ export const query = graphql`
   }
 `;
 
+const serializers = {
+  types: {
+    code: props => (
+      <pre data-language={props.node.language}>
+        <code>{props.node.code}</code>
+      </pre>
+    )
+  }
+}
+
 const Blog = ({ data, location }) => {
 
   const [current, setCurrent] = React.useState(null)
@@ -62,15 +72,15 @@ const Blog = ({ data, location }) => {
         return (
           <div style={{ margin: "2em 0" }}>
 
-            <BlogItem onClick={() => setCurrent(current === blog.node.slug ? null : blog.node.slug)} key={blog.node._id}>
+            <BlogItem onClick={() => setCurrent(current === blog.node._id ? null : blog.node._id)} key={blog.node._id}>
               {fluidProps ? <Img style={{ opacity: 0.5 }} fluid={fluidProps} /> : null}
-              <h1>{blog.node.title}</h1>
+              <h1 style={{marginTop: 50 }}>{blog.node.title}</h1>
             </BlogItem>
 
 
-            {current === blog.node.slug && (
-              <div style={{ margin: "2em 0" }}>
-                <BlockContent blocks={blog.node._rawContent} />
+            {current === blog.node._id && (
+              <div style={{ margin: "3em 0" }}>
+                <BlockContent blocks={blog.node._rawContent} serializers={serializers} />
               </div>
             )}
           </div>
