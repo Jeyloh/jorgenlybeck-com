@@ -38,7 +38,7 @@
     "react-refractor": "^1.0.1",
     "react-vertical-timeline-component": "^2.5.0",
     "styled-components": "^4.4.1",
-    "three": "^0.110.0",
+    "three": "^0.137.0",
     "typeface-audiowide": "0.0.72",
     "typeface-open-sans": "0.0.75"
   },
